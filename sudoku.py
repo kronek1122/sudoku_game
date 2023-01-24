@@ -39,40 +39,11 @@ def display_board():
             row = ' | '.join(row_list)
             print( row )
 
-
+# dodać sprawdzenie poprawności kolumn i wierszy
 def verification_columns():
     pass
 
 
 
-
-
-
-
-
-
-
-
-
 square_filling()
 display_board()
-'''
-if x == 3 and y == 0:
-                i = 3
-                j = 0
-            if x == 4 and y == 0:
-                i = 3
-                j = 3
-            if x == 5 and y == 0:
-                i = 3
-                j = 6
-            if x == 6 and y == 0:
-                i = 6
-                j = 0
-            if x == 7 and y == 0:
-                i = 6
-                j = 3
-            if x == 8 and y == 0:
-                i = 6
-                j = 6
-                '''
