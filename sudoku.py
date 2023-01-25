@@ -33,17 +33,81 @@ def display_board():
                 for z in range(3):
                     row_list.append(full_board[i][j])
                     j = j + 1
-                if z == 2:
-                    i = i + 1
+                i = i + 1
                 j = j - 3
             row = ' | '.join(row_list)
             print( row )
 
-# dodać sprawdzenie poprawności kolumn i wierszy
-def verification_columns():
-    pass
+def verification_row():
+    i = 0
+    j = 0
+    for w in range(3):
+        for x in  range(3):
+            row_list = []
+            for y in range(3):
+                if y == 0:
+                    i = 3 * w
+                    j = x * 3
+                for z in range(3):
+                    row_list.append(full_board[i][j])
+                    j = j + 1
+                i = i + 1
+                j = j - 3
+            for elem in row_list:
+                if row_list.count(elem) > 1:
+                    print("Wiersz nie spełnia założeń gry w sudoku:")
+                    print(row_list)
+                    action()
+
+def verification_column():
+    i = 0
+    j = 0
+    for w in range(3):
+        for x in  range(3):
+            column_list = []
+            for y in range(3):
+                if y == 0:
+                    i = w
+                    j = x
+                for z in range(3):
+                    column_list.append(full_board[i][j])
+                    j = j + 3
+                i = i + 3
+                j = j - 9
+            for elem in column_list:
+                if column_list.count(elem) > 1:
+                    print("Kolumna nie spełnia założeń gry w sudoku:")
+                    print(column_list)
+                    action()
 
 
+def action():
+    print('''
+    1 - generuj sudoku
+    2 - sprawdź czy kolumny spełniają założenia gry
+    3 - sprawdź czy wiersze spełniają założenia gry
+    4 - zakończ
+    ''')
+    x = input('Określ akcję: ')
 
-square_filling()
-display_board()
+    if x == '1':
+        return square_filling(), display_board(), action()
+    elif x == '2':
+        try:
+            return verification_column()
+        except:
+            print('Nie wygenerowano wcześniej sudoku')
+            return action()
+    elif x == '3':
+        try:
+            return verification_row()
+        except:
+            print('Nie wygenerowano wcześniej sudoku')
+            return action()
+    elif x == '4':
+        return quit()
+    else:
+        print('błędne polcenie')
+        return action()
+
+action()
